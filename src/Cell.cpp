@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "Cell.h"
 #include <raylib.h>
 
 void Cell::draw() {

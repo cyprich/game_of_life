@@ -18,7 +18,7 @@ public:
 	void update();
 	void draw();
 
-	void setNeighbors(int n) {this->n = n; update(); };
+	void setNeighbors(int n) {this->n = n;};
 	void setAlive(bool value) {alive = value;} ;
 
 	int isAlive() {return alive;};
