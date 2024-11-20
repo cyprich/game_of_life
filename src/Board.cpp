@@ -9,6 +9,14 @@ Board::Board() {
 			board[x][y] = new Cell(x*p, y*p, p);
 		}
 	}
+
+	/*board[10][10]->setAlive(true);*/
+	/*board[11][10]->setAlive(true);*/
+	/*board[12][10]->setAlive(true);*/
+
+	for (int i = 10; i <= 20; i++) {
+		board[10][i]->setAlive(true);
+	}
 }
 
 void Board::draw() {
@@ -51,12 +59,32 @@ void Board::update() {
 				// iterating every direction
 				// checking if index is not out of range (0 to number of cells)
 				if (x+d[0] >= 0 && x+d[0] < this->x && y+d[1] >= 0 && y+d[1] < this->y) {
-					// checking if cell is alive, then adding neighbor count
-					if (board[x+d[0]][y+d[1]]->isAlive()) {n++; };
+					// checking if neighbor cell is alive, then adding neighbor count
+					if (board[x+d[0]][y+d[1]]->isAlive()) {n++;};
 				}
 			}
+
 			// setting new number of neighbors to current cell
 			board[x][y]->setNeighbors(n);
 		}
 	}
+
+	int alive = 0;
+	for (int x = 0; x < this->x; x++) {
+		for (int y = 0; y < this->y; y++) {
+			if (board[x][y]->isAlive()) {alive++;};
+		}
+	}
+}
+
+
+int Board::getNumberAlive() {
+	int	n = 0;
+	for (int x = 0; x < this->x; x++) {
+		for (int y = 0; y < this->y; y++) {
+			if (board[x][y]->isAlive()) {n++;}
+		}
+	}
+	
+	return n;
 }

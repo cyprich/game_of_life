@@ -11,6 +11,9 @@ private:
 public:
 	Board();
 	~Board();
+
 	void update();
 	void draw();
+
+	int getNumberAlive();
 };

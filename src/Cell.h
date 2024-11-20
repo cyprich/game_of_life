@@ -1,3 +1,4 @@
+#pragma once
 #include "raylib.h"
 #include <cstdlib>
 #include <iostream>
@@ -5,8 +6,8 @@
 class Cell {
 private:
 	int x, y, p, n;
-	int alive = rand() % 2;
-	/*int alive = false;*/
+	/*int alive = rand() % 2;*/
+	int alive = false;
 	/*int alive = true;*/
 	Color color = {0,0,0, 255};  // TODO maybe change this
 public:
@@ -17,8 +18,8 @@ public:
 	void update();
 	void draw();
 
-	void setNeighbors(int n) {this->n = n; setAlive(); };
-	void setAlive();
+	void setNeighbors(int n) {this->n = n; update(); };
+	void setAlive(bool value) {alive = value;} ;
 
 	int isAlive() {return alive;};
 	int getX() { return x; };
