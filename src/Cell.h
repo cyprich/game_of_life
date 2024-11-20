@@ -5,8 +5,9 @@
 class Cell {
 private:
 	int x, y, p, n;
-	/*int alive = rand() % 2;*/
-	int alive = false;
+	int alive = rand() % 2;
+	/*int alive = false;*/
+	/*int alive = true;*/
 	Color color = {0,0,0, 255};  // TODO maybe change this
 public:
 	Cell(): x(0), y(0), p(10) {};
@@ -16,9 +17,8 @@ public:
 	void update();
 	void draw();
 
-	void setAlive() {alive = (n == 2 || n == 3);} ;
-	void setAlive(bool value) {this->alive = value; };
 	void setNeighbors(int n) {this->n = n; setAlive(); };
+	void setAlive();
 
 	int isAlive() {return alive;};
 	int getX() { return x; };
