@@ -7,7 +7,7 @@ int main(int argc, char* argv[]) {
     InitWindow(1000, 1000, "Conway's Game of Life");
     SetTargetFPS(5);
 
-    board->loadFromFile("src/ship1.txt");
+    board->loadFromFile("input/oscillator5.txt");
 
     while (!WindowShouldClose()) {
 
