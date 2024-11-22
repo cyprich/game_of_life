@@ -13,7 +13,6 @@ class Cell {
   public:
     Cell() : x(0), y(0), p(10) {};
     Cell(int posX, int posY, int size) : x(posX), y(posY), p(size) {};
-    ~Cell();
 
     void update();
     void draw();

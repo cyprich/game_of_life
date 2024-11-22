@@ -8,7 +8,8 @@ int main(int argc, char* argv[]) {
 
     Board* board = new Board();
     FilePathList files = LoadDirectoryFiles("input");
-    board->loadFromFile(files.paths[rand() & files.count]);  // loading random file
+    board->loadFromFile(
+        files.paths[rand() & files.count]); // loading random file
 
     InitWindow(1000, 1000, "Conway's Game of Life");
     SetTargetFPS(5);
@@ -26,6 +27,8 @@ int main(int argc, char* argv[]) {
     }
 
     CloseWindow();
+
+    delete board;
 
     return 0;
 }

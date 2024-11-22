@@ -14,18 +14,16 @@ Board::Board() {
             board[x][y] = new Cell(x * p, y * p, p);
         }
     }
+}
 
-    // oscillator
-    /*board[10][50]->setAlive(true);*/
-    /*board[10][51]->setAlive(true);*/
-    /*board[10][52]->setAlive(true);*/
-
-    // glider
-    /*board[10][10]->setAlive(true);*/
-    /*board[10][12]->setAlive(true);*/
-    /*board[11][11]->setAlive(true);*/
-    /*board[11][12]->setAlive(true);*/
-    /*board[12][11]->setAlive(true);*/
+Board::~Board() {
+    for (int i = 0; i < y; i++) {
+        for (int j = 0; j < x; j++) {
+            delete board[i][j];
+        }
+        delete[] board[i];
+    }
+    delete[] board;
 }
 
 void Board::draw() {
@@ -164,7 +162,6 @@ void Board::loadFromFile(const std::string& source) {
     for (int i = 0; i < sizeY; i++) {
         delete[] array[i];
     }
-
     delete[] array;
 
     std::cout << "Loading from " << source << " done successfully" << std::endl;
