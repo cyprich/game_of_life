@@ -5,11 +5,16 @@
 
 int main(int argc, char* argv[]) {
     srand(time(NULL));
-
     Board* board = new Board();
-    FilePathList files = LoadDirectoryFiles("input");
-    board->loadFromFile(
-        files.paths[rand() & files.count]); // loading random file
+
+    if (argc == 1) {  // if file path is not specified, load random file
+        FilePathList files = LoadDirectoryFiles("input");
+        board->loadFromFile(
+            files.paths[rand() & files.count] // loading random file
+	); 
+    } else { 
+	board->loadFromFile(argv[1]);
+    }
 
     InitWindow(1000, 1000, "Conway's Game of Life");
     SetTargetFPS(5);
