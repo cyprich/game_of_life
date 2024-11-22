@@ -1,29 +1,28 @@
-#include "raylib.h"
 #include "Board.h"
+#include "raylib.h"
 
-int main (int argc, char *argv[]) {
-	Board* board = new Board();
+int main(int argc, char* argv[]) {
+    Board* board = new Board();
 
-	InitWindow(1000, 1000, "Conway's Game of Life");
-	SetTargetFPS(10);
+    InitWindow(1000, 1000, "Conway's Game of Life");
+    SetTargetFPS(5);
 
-  /*board->loadFromFile("src/input.txt");*/
+    board->loadFromFile("src/ship1.txt");
 
-	while (!WindowShouldClose()) {
+    while (!WindowShouldClose()) {
 
-		BeginDrawing();
-		ClearBackground(WHITE);
+        BeginDrawing();
 
-		board->draw();
+        ClearBackground(WHITE);
+        board->draw();
 
-		EndDrawing();
+        EndDrawing();
 
-		board->update();
+        board->update();
+        /*WaitTime(0.25);*/
+    }
 
-		/*WaitTime(0.25);*/
-	}
+    CloseWindow();
 
-	CloseWindow();
-
-	return 0;
+    return 0;
 }
