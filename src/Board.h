@@ -25,6 +25,8 @@ public:
 
 	void update();
 	void draw();
+  void loadFromFile(const std::string& source);
+  void load(int** array, int sizeX, int sizeY);
 
 	int getNumberAlive();
 };

@@ -7,6 +7,8 @@ int main (int argc, char *argv[]) {
 	InitWindow(1000, 1000, "Conway's Game of Life");
 	SetTargetFPS(10);
 
+  /*board->loadFromFile("src/input.txt");*/
+
 	while (!WindowShouldClose()) {
 
 		BeginDrawing();

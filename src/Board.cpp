@@ -1,5 +1,9 @@
 #include "Board.h"
 #include "raylib.h"
+#include <cstdio>
+#include <fstream>
+#include <iostream>
+#include <string>
 
 Board::Board() {
 	board = new Cell**[x];
@@ -11,16 +15,16 @@ Board::Board() {
 	}
 
 	// oscillator
-	board[10][50]->setAlive(true);
-	board[10][51]->setAlive(true);
-	board[10][52]->setAlive(true);
+	/*board[10][50]->setAlive(true);*/
+	/*board[10][51]->setAlive(true);*/
+	/*board[10][52]->setAlive(true);*/
 
 	// glider
-	board[10][10]->setAlive(true);
-	board[10][12]->setAlive(true);
-	board[11][11]->setAlive(true);
-	board[11][12]->setAlive(true);
-	board[12][11]->setAlive(true);
+	/*board[10][10]->setAlive(true);*/
+	/*board[10][12]->setAlive(true);*/
+	/*board[11][11]->setAlive(true);*/
+	/*board[11][12]->setAlive(true);*/
+	/*board[12][11]->setAlive(true);*/
 }
 
 void Board::draw() {
@@ -90,4 +94,76 @@ int Board::getNumberAlive() {
 	}
 	
 	return n;
+}
+
+/*expected file is "matrix" of integers*/
+void Board::loadFromFile(const std::string& source) {
+	std::ifstream file(source);
+
+	if (!file.is_open()) {
+		std::cerr << "Failed to open file " << source << std::endl;
+		return;
+	}
+
+	int xSize = 0;
+	int ySize = 0;
+
+	std::string line;
+
+	// get number of columns = xsize
+	if (std::getline(file, line)) {
+		xSize = line.size();
+		ySize++;
+	}
+	// get number of rows = ysize
+	while (std::getline(file, line)) {
+		ySize++;
+	}
+
+	// allocating memory for array
+	int** array = new int*[ySize];
+	for (int y = 0; y < ySize; y++) {
+		array[y] = new int[xSize];
+	}
+
+	// go to the beginning of the file
+	file.clear();
+	file.seekg(0);
+
+	// read from file and save it to array
+	int currentX = 0;
+	int currentY = 0;
+	while (std::getline(file, line)) {
+		for (auto l : line) {
+			array[currentY][currentX] = l;
+			currentX++;
+		}
+		currentY++;
+	}
+
+	// closing the file
+	file.close();
+
+
+	// pass loaded matrix to function load
+	load(array, xSize, ySize);
+
+	// deallocate memory
+	for (int i = 0; i < ySize; i++) {
+		delete[] array[i];
+	}
+
+	delete[] array;
+	
+	std::cout << "Loading from " << source << " done successfully" << std::endl;
+}
+
+void Board::load(int** array, int sizeX, int sizeY) {
+	for (int y = 0; y < sizeY; y++) {
+		for (int x = 0; x < sizeX; x++) {
+			if (array[y][x] != 0) {
+				board[x][y]->setAlive(true);
+			}
+		}
+	}
 }
